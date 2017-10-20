@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "Create";
+}
+<a href="/home">Home</a>
+<a href="logout">Log off</a>
+<h1>Dojo Activity Center</h1>
+<hr>
+<h2>Create an Activity!</h2>
+<form action="create" method="post">
+    <p>Title: <input type="text" name="Title"></p>
+    <p>Date: <input type="date" name="Date"></p>
+    <p>Time: <input type="time" name="Time"></p>
+    <p>
+        Duration: <input type="number" name="num">
+        <select name="dur">
+            <option value=" Hour(s)">Hour(s)</option>
+            <option value=" Minute(s)">Minute(s)</option>
+            <option value=" Day(s)">Day(s)</option>
+        </select>
+        
+    </p>
+    <p>Description:</p>
+    <p><textarea name="Description" cols="30" rows="10"></textarea></p>
+    <p><button type="submit">Create Activity</button></p>
+</form>
+<div>
+    @{
+        foreach(var error in ViewBag.acterrors)
+        {
+            if(@error.Errors.Count > 0)
+            {
+                <p>@error.Errors[0].ErrorMessage</p>
+            }
+        }
+    }
+</div>

@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Activity";
+}
+<a href="/home">Home</a>
+<a href="logout">Log off</a>
+<h1>Dojo Activity Center</h1>
+<hr>
+<h2>@ViewBag.activity.Title</h2>
+
+<h3>Event Coordinator: 
+        @foreach(var i in ViewBag.users){
+            if(i.UserId == ViewBag.activity.UserId){
+                @i.First
+            }
+        }
+</h3>
+
+
+
+
+
+@if(ViewBag.activity.UserId == @ViewBag.sessionUserId)
+                {
+                    <a href="/delete/@ViewBag.activity.ActivityId"><button>Delete</button></a>
+                }
+                else{
+                    var num=0;
+                @foreach(var i in ViewBag.activity.Participants){
+                    @if(i.UserId == ViewBag.sessionUserId)
+                    {
+                        <a href="/leave/@ViewBag.activity.ActivityId"><button>Leave</button></a>
+                        num++;
+                    } 
+                }
+                if(num==0)
+                {
+                    <a href="/join/@ViewBag.activity.ActivityId"><button>Join</button></a>
+                }
+                }
+
+<h3>Description:</h3>
+<p> @ViewBag.activity.Description</p>
+<h3>Particpants:</h3>
+@foreach(var p in ViewBag.activity.Participants){
+    <p>@p.User.First @p.User.Last</p>
+}
